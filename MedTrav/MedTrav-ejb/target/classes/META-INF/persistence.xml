@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="MedTrav-ejb">
-		<jta-data-source>java:/MySqlDS</jta-data-source>
+			<jta-data-source>java:jboss/datasources/MedTravDS</jta-data-source>
+		<class>entities.User</class>
+		<class>entities.Patient</class>
+		<class>entities.Doctor</class>
+		<class>entities.Booking</class>
+		<class>entities.Flight</class>
+		<class>entities.FlightMatching</class>
+		<class>entities.MedicalRecords</class>
+		<class>entities.Testimony</class>
+		<class>entities.Surgery</class>
+		<class>entities.Administrator</class>
+		<class>entities.Question</class>
+		<class>entities.Clinic</class>
+		<class>entities.Hotel</class>
+		<class>entities.ServiceHotel</class>
+		<class>entities.Procedure</class>
+		<class>entities.HotelBooking</class>
+		<class>entities.ClinicBooking</class>
+		<class>entities.HotelBookingID</class>
+		<class>entities.ClinicBookingID</class>
+		<class>entities.DoctorPatient</class>
+		<class>entities.DoctorPatientID</class>
+		<class>entities.SurgeryPatient</class>
+		<class>entities.SurgeryPatientID</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 		</properties>
