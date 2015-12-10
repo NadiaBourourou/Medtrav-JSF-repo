@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="MedTrav-ejb">
-			<jta-data-source>java:jboss/datasources/MedTravDS</jta-data-source>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="medtrav">
+		<jta-data-source>java:jboss/datasources/MedTravDS</jta-data-source>
 		<class>entities.User</class>
 		<class>entities.Patient</class>
 		<class>entities.Doctor</class>
@@ -26,7 +28,9 @@
 		<class>entities.SurgeryPatient</class>
 		<class>entities.SurgeryPatientID</class>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>
