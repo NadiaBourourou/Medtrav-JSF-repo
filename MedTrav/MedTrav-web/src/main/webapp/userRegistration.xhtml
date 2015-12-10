@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<br />
+	<h1>Patient regitration form : </h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			
+			<p:outputLabel value="First Name" />
+			<p:inputText value="#{userBean.patient.firstName}" />
+			
+			<p:outputLabel value="Last Name" />
+			<p:inputText value="#{userBean.patient.lastName}" />
+		
+			<p:outputLabel value="CIN" />
+			<p:inputText value="#{userBean.patient.cin}" />
+			
+			<p:outputLabel for="popup" value="Date of birth" />
+           <p:calendar id="popup" value="#{userBean.patient.dateOfBirth}" />
+			
+			<p:outputLabel value="Mail" />
+			<p:inputText value="#{userBean.patient.mail}" />
+			<p:outputLabel value="Login" />
+			<p:inputText  value="#{userBean.patient.login}" />
+			
+			<p:outputLabel value="Password" />
+			<p:password id="nonFeedback"  value="#{userBean.patient.password}" />
+			
+			
+			
+	<p:growl autoUpdate="true" />
+ <h:form>
+
+    <p:signature style="width:400px;height:200px" widgetVar="sig" value="#{userBean.patientSignature}" required="true" label="Signature" guideline="true"/>
+ 
+    <div style="margin:20px 0">
+        <p:commandButton value="Submit" icon="ui-icon-check" update="output"/>
+        <p:commandButton value="Clear" icon="ui-icon-close" type="button" onclick="PF('sig').clear()"/>
+    </div>
+ 
+    <p:outputPanel id="output">
+        <h:outputText rendered="#{not empty userBean.patientSignature}" style="font-size:24px;display:block" value="Your Signature" />
+        <p:signature style="width:400px;height:200px;" value="#{userBean.patientSignature}" readonly="true"
+                     rendered="#{not empty userBean.patientSignature}" backgroundColor="#eaeaea" color="#03a9f4"/>
+    </p:outputPanel>
+ </h:form>    
+    
+		
+		</h:panelGrid>
+		<h:commandButton action="#{userBean.doAddPatient()}" value="Register" />
+	</h:form>
+</body>
+</html>
