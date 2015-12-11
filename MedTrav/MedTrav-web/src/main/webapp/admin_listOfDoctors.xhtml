@@ -10,12 +10,49 @@
 
 
 	<h:form id="form">
+
+		<h:commandLink action="#{userBean.displayForm()}" value="Add Doctor" />
+		<h:panelGrid columns="3" 
+			rendered="#{userBean.diplayAddDoctorForm}">
+
+			<p:outputLabel value="First Name" />
+			<p:inputText id="firstname" value="#{userBean.doctor.firstName}" required="true" />
+			 <p:message for="firstname" display="icon" />
+
+			<p:outputLabel value="Last Name" />
+			<p:inputText id="lastname" value="#{userBean.doctor.lastName}" required="true" />
+			 <p:message for="lastname" display="icon" />
+
+			<p:outputLabel value="CIN" />
+			<p:inputText id="cin" value="#{userBean.doctor.cin}"  required="true"/>
+			<p:message for="cin" display="icon" />
+
+			<p:outputLabel value="Mail" />
+			<p:inputText id="mail" value="#{userBean.doctor.mail}" required="true"/>
+			<p:message for="mail" display="icon" />
+
+			<p:outputLabel value="Specialty" />
+			<p:inputText id="spec" value="#{userBean.doctor.specialty}" required="true"/>
+			<p:message for="spec" display="icon" />
+
+			<p:outputLabel value="Description" />
+			<p:inputTextarea id="description" rows="5" cols="33"
+				value="#{userBean.doctor.description}" required="true" />
+			<p:message for="description" display="icon" />
+		
+			<h:commandButton action="#{userBean.doAddDoctor()}"
+				value="Add Doctor" />
+	</h:panelGrid>
+	
+
+
 		<p:growl id="msgs" showDetail="true" />
-		<!-- 
+
+<!-- 
     <p:dataTable id="tbl" var="doc" value="#{admin_doctors_selectionView.allDoctors}"
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                  paginator="true" rows="7" style="margin-bottom:20px">
-   -->
+-->
 
 
 		<p:dataTable id="allDoctors" var="doc"
@@ -38,7 +75,8 @@
 						<h:outputText value="#{doc.login}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="modelInput" value="#{doc.login}" style="width:100%" />
+						<p:inputText id="modelInput" value="#{doc.login}"
+							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -54,14 +92,28 @@
 				</p:cellEditor>
 			</p:column>
 
-	
-		<p:column headerText="Specialty">
+
+			<p:column headerText="Specialty">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{doc.specialty}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{doc.specialty}" style="width:100%" label="Specialty" />
+						<p:inputText value="#{doc.specialty}" style="width:100%"
+							label="Specialty" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+		<p:column headerText="Description">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{doc.description}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{doc.description}" style="width:100%"
+							label="Specialty" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -69,6 +121,8 @@
 			<p:column style="width:32px">
 				<p:rowEditor />
 			</p:column>
+
+
 		</p:dataTable>
 
 
