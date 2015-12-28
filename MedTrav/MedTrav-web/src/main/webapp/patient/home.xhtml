@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+</head>
+<body>
+	<h3>Hello patient! </h3>
+	<h4>You are logged in as #{loginBean.found.firstName}</h4>
+
+	<h:form>
+		<p:commandButton value="Begin journey"
+			action="patient_listOfSurgeries" icon="ui-icon-star" ajax="false" />
+	</h:form>
+
+
+</body>
+</html>
