@@ -14,7 +14,7 @@ import entities.Doctor;
 import entities.Patient;
 import entities.User;
 
-@ManagedBean
+@ManagedBean (name = "loginBean")
 @SessionScoped
 public class LoginBean implements Serializable {
 
@@ -56,10 +56,27 @@ public class LoginBean implements Serializable {
 
 	public String logout() {
 
-		FacesContext.getCurrentInstance().getExternalContext()
-				.invalidateSession();
-		return "welcome.jsf?faces-redirect=true";
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "login.jsf?faces-redirect=true";
 	}
+	
+	public Boolean hasRole(String role) {
+		Boolean response = false;
+		switch (role) {
+		case "Admin":
+			response = found instanceof Administrator;
+			break;
+		case "Doc":
+			response = found instanceof Doctor;
+			break;
+		case "Patient":
+			response = found instanceof Patient;
+			break;
+		
+		}
+		return response;
+	}
+	
 
 	public String getPassword() {
 		return password;

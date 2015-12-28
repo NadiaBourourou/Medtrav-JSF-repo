@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form rendered="#{not empty loginBean.found}">
+		<h:panelGrid columns="3">
+			<h:outputText value="Logged in as " />
+			<h:outputText value="#{loginBean.found.login}" />
+
+			<p:commandButton value="Logout"
+				actionListener="#{loginBean.logout()}" 
+				styleClass="ui-priority-primary" action="/webapp/login" />
+
+		</h:panelGrid>
+	</h:form>
+
+</ui:composition>
