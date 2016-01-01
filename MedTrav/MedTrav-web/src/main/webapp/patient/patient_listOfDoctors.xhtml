@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+
+<h:form id="form">
+<p:growl id="msgs" showDetail="true"/>
+<p:growl id="message" showDetail="true" />
+ 
+ 
+ 
+  <p:carousel value="#{userBean.doctors}" headerText="Responsive" var="doc" itemStyle="text-align:center" responsive="true">
+        <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">
+   
+            <h:outputText value="Full name:" />
+            <h:outputText value="#{doc.firstName} #{doc.lastName}" />
+ 
+            <h:outputText value="Contact :" />
+            <h:outputText value="#{doc.mail}" />
+ 
+            <h:outputText value="Specialty: " />
+            <h:outputText value="#{doc.specialty}" />
+ 
+            <h:outputText value="Description : " />
+            <h:outputText value="#{doc.description}" />
+            
+            
+          <p:commandButton value="Book" id="ajax" update=":form:message"  action="patient_listOfSurgeries" actionListener="#{userBean.doBookDoctor(doc)}" icon="ui-icon-star"  styleClass="ui-priority-primary" />
+        </p:panelGrid>
+ 
+        
+    </p:carousel>
+ 
+ 
+</h:form>
+
+
+</body>
+</html>

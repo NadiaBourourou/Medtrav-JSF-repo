@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+<ui:define name="title">Surgeries</ui:define>
+
+<ui:define name="pageContent">
+
+
+	<h:form id="form" >
+		<p:growl id="msgs" showDetail="true" />
+		<p:growl id="message" showDetail="true" />
+
+
+		<p:dataTable id="basicDT" var="surgery"
+			value="#{surgeryBean.surgeries}"
+			style="padding:5%">
+			<f:facet name="header">
+            Select a surgery
+  	</f:facet>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Name" />
+				</f:facet>
+				<h:outputText value="#{surgery.name}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Description" />
+				</f:facet>
+				<h:outputText value="#{surgery.description}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Procedure Type" />
+				</f:facet>
+				<h:outputText value="#{surgery.procedure.name}" />
+			</p:column>
+
+			<p:column style="width:32px;text-align: center">
+
+				<p:commandButton update=":form:surgeryDetail"
+					oncomplete="PF('surgeryDialog').show()" icon="ui-icon-search"
+					title="View">
+					<f:setPropertyActionListener value="#{surgery}"
+						target="#{surgeryBean.selectedSurgery}" />
+				</p:commandButton>
+
+
+			</p:column>
+		</p:dataTable>
+
+
+
+
+		<p:dialog header="More Info : " widgetVar="surgeryDialog" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="surgeryDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty surgeryBean.selectedSurgery}"
+					columnClasses="label,value">
+
+
+					<h:outputText value="ProcedureType " />
+					<h:outputText value="#{surgeryBean.selectedSurgery.procedure.name}" />
+
+					<h:outputText value="Surgery " />
+					<h:outputText value="#{surgeryBean.selectedSurgery.name}" />
+
+					<h:outputText value="Price " />
+					<h:outputText value="#{surgeryBean.selectedSurgery.price}" />
+
+					<h:outputText value="   " />
+					<p:commandButton value="Book" id="ajax" update=":form:message"
+						
+						actionListener="#{surgeryBean.doBookSurgery(surgeryBean.selectedSurgery)}"
+						icon="ui-icon-star" styleClass="ui-priority-primary" 
+						action="patient_listOfDoctors"/>
+
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+
+
+	</h:form>
+	
+	
+
+</ui:define>
+	
+</ui:composition>
