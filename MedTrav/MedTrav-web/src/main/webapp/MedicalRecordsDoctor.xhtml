@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<h:form>
+		<p:dataTable emptyMessage="No patients found" paginator="true"
+			paginatorPosition="bottom" value="#{medicalRecordsBean.patients}"
+			rows="4" var="patient" editable="false">
+			<f:facet name="header">
+				<h:outputText value="Assigned patients" />
+			</f:facet>
+			<p:column headerText="First Name ">
+				<h:outputText value="#{patient.firstName}" />
+			</p:column>
+
+			<p:column headerText="Last name">
+				<h:outputText value="#{patient.lastName}" />
+			</p:column>
+
+			<p:column headerText="Gender">
+				<h:outputText value="#{patient.sexe}" />
+			</p:column>
+
+			<p:column headerText="Analysis">
+				<p:commandButton
+					action="#{medicalRecordsBean.doDownloadAnalysis(patient.userId )}"
+					value="Show Analysis" />
+			</p:column>
+			<p:column headerText="Update patient's medical records">
+				<p:fileUpload
+					fileUploadListener="#{medicalRecordsBean.doUpdateMedicalRecords}"
+					mode="advanced" update="messages" auto="true"
+					allowTypes="/(\.|\/)(pdf)$/" />
+				<p:growl id="messages" showDetail="true" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</body>
+</html>
