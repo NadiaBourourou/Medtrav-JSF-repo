@@ -30,13 +30,13 @@
 			<p:column headerText="Analysis">
 				<p:commandButton
 					action="#{medicalRecordsBean.doDownloadAnalysis(patient.userId )}"
-					value="Show Analysis" />
+					value="Show Analysis" ajax="false" />
 			</p:column>
 			<p:column headerText="Update patient's medical records">
 				<p:fileUpload
 					fileUploadListener="#{medicalRecordsBean.doUpdateMedicalRecords}"
 					mode="advanced" update="messages" auto="true"
-					allowTypes="/(\.|\/)(pdf)$/" />
+					allowTypes="/(\.|\/)(pdf)$/" ajax="false"/>
 				<p:growl id="messages" showDetail="true" />
 			</p:column>
 

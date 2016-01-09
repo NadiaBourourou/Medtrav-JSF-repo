@@ -58,7 +58,7 @@ public class MedicalRecordsBean implements Serializable {
 		String contentType = event.getFile().getContentType();
 		byte[] contents = event.getFile().getContents();
 
-		patient.setUserId(2);
+		patient.setUserId(1);
 
 		medicalRecords.setPatient(patient);
 		medicalRecords.setAnalysis(contents);
@@ -71,8 +71,8 @@ public class MedicalRecordsBean implements Serializable {
 				.getFileName() + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		byte[] contents = event.getFile().getContents();
-		patient.setUserId(1);
-		medicalRecords.setPatient(patient);
+		//patient.setUserId(1);
+		//medicalRecords.setPatient(patient);
 		medicalRecords.setPatientFile(contents);
 
 		medicalRecordsServicesLocal.updateMedicalRecords(medicalRecords);
@@ -80,22 +80,27 @@ public class MedicalRecordsBean implements Serializable {
 	}
 
 	public void doDownloadAnalysis(int id) throws IOException {
-		   String filename = "GU30282.pdf";
-		byte[] analysis = medicalRecordsServicesLocal.downloadAnalysis(2);
+		String filename = "GU30282.pdf";
+		byte[] analysis = medicalRecordsServicesLocal.downloadAnalysis(1);
 		FacesContext faces = FacesContext.getCurrentInstance();
 		HttpServletResponse response = (HttpServletResponse) faces
 				.getExternalContext().getResponse();
 		response.setContentType("application/pdf");
 		response.setContentLength(analysis.length);
-		response.setHeader("Content-disposition", "inline;  filename=\""+filename+"\"");
+		response.setHeader("Content-disposition", "inline; filename=");
 		try {
-			ServletOutputStream out;
-			out = response.getOutputStream();
-			out.write(analysis);
+			ServletOutputStream out1;
+			out1 = response.getOutputStream();
+			out1.write(analysis);
+
+			out1.close();
+			out1.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		faces.responseComplete();
+
 		System.out.println(id);
 	}
 

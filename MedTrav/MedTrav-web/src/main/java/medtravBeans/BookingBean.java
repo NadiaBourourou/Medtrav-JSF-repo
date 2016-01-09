@@ -35,7 +35,9 @@ public class BookingBean {
 	private Surgery surgery;
 	private DoctorPatient doctorPatient;
 	private Doctor doctor;
+	String nomprenom;
 	
+
 	@EJB
 	BookingServicesLocal bookingServicesLocal;
 	
@@ -64,6 +66,7 @@ public class BookingBean {
 		surgery = surgeryPatient.getSurgery();
 		doctorPatient = bookingServicesLocal.findDoctorPatientByPatientId(1);
 		doctor = doctorPatient.getDoctor();
+		nomprenom= doctor.getFirstName() + " " + doctor.getLastName();
 		flight = bookingServicesLocal.findFlightByPatientId(1);		
 	}
 	
@@ -86,6 +89,10 @@ public class BookingBean {
 		
 		bookingServicesLocal.addBooking(booking);
 		
+	}
+	public void doDeleteBooking ( ) {
+		booking = bookingServicesLocal.findBookingByPatientId(1);
+		bookingServicesLocal.deleteBooking(booking);
 	}
 
 	public Booking getBooking() {
@@ -168,5 +175,13 @@ public class BookingBean {
 		this.doctor = doctor;
 	}
 	
+	public String getNomprenom() {
+		return nomprenom;
+	}
+
+	public void setNomprenom(String nomprenom) {
+		this.nomprenom = nomprenom;
+	}
+
 
 }

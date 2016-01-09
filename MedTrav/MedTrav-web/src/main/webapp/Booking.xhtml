@@ -7,58 +7,41 @@
 
 <h:head></h:head>
 <body>
-	<h:form>
-		<p:panelGrid columns="3" border="1">
-			<p:row>
-				<h:outputLabel value="Clinic" style="font-weight: bold;" />
-				<h:inputText value="#{bookingBean.clinic.name}" readonly="true" />
-			</p:row>
-						<p:row>
-				<p:column colspan="4" styleClass="ui-widget-header">
-					<p:spacer height="0" />
-				</p:column>
-			</p:row>
-			<p:row>
-				<h:outputLabel value="Hotel" style="font-weight: bold;" />
-				<h:inputText value="#{bookingBean.hotel.name}" readonly="true" />
-			</p:row>
-			<p:row>
-				<p:column colspan="4" styleClass="ui-widget-header">
-					<p:spacer height="0" />
-				</p:column>
-			</p:row>
-			<p:row>
-				<h:outputLabel value="Flight" style="font-weight: bold;" />
-				<h:inputText value="#{bookingBean.flight.arrivalDate}"
-					readonly="true" />
-			</p:row>
-			<p:row>
-				<p:column colspan="4" styleClass="ui-widget-header">
-					<p:spacer height="0" />
-				</p:column>
-			</p:row>
-			<p:row>
-				<h:outputLabel value="Doctor" style="font-weight: bold;" />
-				<h:inputText value="#{bookingBean.doctor.firstName }"
-					readonly="true" />
-				<h:inputText value="#{bookingBean.doctor.lastName}" readonly="true" />
-			</p:row>
-			<p:row>
-				<p:column colspan="4" styleClass="ui-widget-header">
-					<p:spacer height="0" />
-				</p:column>
-			</p:row>
-			<p:row>
-				<h:outputLabel value="Surgery" style="font-weight: bold;" />
-				<h:inputText value="#{bookingBean.surgery.name}" readonly="true" />
-			</p:row>
+	<h:form id="booking">
+		<p:panelGrid columns="3">
 
+			<h:outputLabel value="Clinic" style="font-weight: bold;" />
+			<p:inputText value="#{bookingBean.clinic.name}" readonly="true" />
+			<p:commandButton value="Change Clinic" />
+
+			<h:outputLabel value="Hotel" style="font-weight: bold;" />
+			<p:inputText value="#{bookingBean.hotel.name}" readonly="true" />
+			<p:commandButton value="Change Hotel" />
+
+			<h:outputLabel value="Flight" style="font-weight: bold;" />
+			<p:inputText value="#{bookingBean.flight.arrivalDate}"
+				readonly="true" />
+			<p:commandButton value="Change Flight" />
+
+			<h:outputLabel value="Doctor" style="font-weight: bold;" />
+			<p:inputText value="#{bookingBean.nomprenom }" readonly="true" />
+			<p:commandButton value="Change Doctor" />
+
+
+			<h:outputLabel value="Surgery" style="font-weight: bold;" />
+			<p:inputText value="#{bookingBean.surgery.name}" readonly="true" />
+			<p:commandButton value="Change Surgery" />
 
 		</p:panelGrid>
 		<p:commandButton value="Show details"
-			action="#{bookingBean.doShowBooking()}" />
+			action="#{bookingBean.doShowBooking()}" ajax="false" />
 		<p:commandButton value="Book" id="withIcon"
-			action="#{bookingBean.doAddBooking()}" icon="ui-icon-disk" />
+			action="#{bookingBean.doAddBooking()}" icon="ui-icon-disk"
+			ajax="false" />
+
+		<p:commandButton value="Cancel booking" id="withIcon1"
+			action="#{bookingBean.doDeleteBooking()}" ajax="false"
+			icon="ui-icon-close" />
 
 
 	</h:form>
