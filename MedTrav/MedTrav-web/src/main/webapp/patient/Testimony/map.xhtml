@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	  xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:mashup="http://code.google.com/p/mashups4jsf/" >
+
+<h:head> 
+ <mashup:resources />
+ 
+    <f:facet name="first">
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </f:facet>
+ </h:head>
+ 
+<body>
+
+<script
+
+src="http://maps.google.com/maps?file=api&amp;v=2&amp;
+key=ABQIAAAAxrVS1QxlpJHXxQ2Vxg2bJBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxS9AOPy_YJl48ifAy4mq6I8SgK8fg"
+type="text/javascript">
+
+</script>    
+    
+    
+
+ <h1> Discover the Tunisian climate by hotels locations  </h1>
+    
+        <h:form id="form1">
+
+            <p:dataTable id="myTable" var="u" 
+                         value="#{theater2.hotels}"
+                         headerClass="tableHeader"
+                         columnClasses="tableColumn1, tableColumn2, tableColumn3, tableColumn4"
+                         rowClasses="oddRow, evenRow"
+                         styleClass="tableStyle">
+                         
+                         
+	
+                         
+                         
+                         
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Hotel name" />
+                    </f:facet>
+
+                    <p:outputLabel value="#{u.name}"/>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="Address" />
+                    </f:facet>
+
+                    <p:outputLabel value="#{u.address}"/>
+                </p:column>
+
+              
+
+                <p:column>
+                    <f:facet name="header">
+                        <p:outputLabel value="View" />
+                    </f:facet>
+
+                    <h:commandLink value="View Place Information"  >
+                    
+                       <f:setPropertyActionListener value="#{u}" target="#{theater2.hotel}"></f:setPropertyActionListener>
+			
+			<f:setPropertyActionListener value="true"
+							target="#{theater2.afficheMap}">
+						</f:setPropertyActionListener>
+                        
+                        	
+                    </h:commandLink>
+                </p:column>
+            </p:dataTable>
+
+            <br />
+            <h:panelGrid rendered="#{theater2.afficheMap}" id="grid" columns="2" cellpadding="10px">
+                <h:panelGroup id="placeMap">
+                   <m:map width="400px" height="300px"
+                           partiallyTriggered="true"
+                           rendered="#{theater2.hotel ne null}"
+                            renderOnWindowLoad="false"
+                           address="#{theater2.hotel.address}" zoom="9">
+                        <m:marker/>
+                        <m:htmlInformationWindow htmlText="#{theater2.hotel.address}"/>
+                    </m:map>
+                </h:panelGroup>
+
+                <h:panelGroup id="placeWeather">
+                    <mashup:yahooWeather locationCode="#{theater2.hotel.codePostal}"
+                                         rendered="#{theater2.hotel ne null}" 
+                                         temperatureType="c"/>
+                </h:panelGroup>
+            </h:panelGrid>
+    <p:commandButton value="Return" action="/patient/Testimony/listTestimony"  />  
+
+		
+        </h:form>
+
+
+		
+		================
+		
+		  <h1>Search on Google</h1>
+    
+    <h:form id="mashupSearchForm">
+    
+        <h:panelGrid columns="3">
+            <p:outputLabel styleClass="standard_bold" value="Enter the hotel to search: "/>
+            <p:inputText id="txtSearchQuery" styleClass="standard"  value="#{mashupSearchForm.searchQuery}" required="true"/>
+            <p:commandButton value="Search in the world!" styleClass="standard" action="#{mashupSearchForm.doNothing}">            
+                 <f:ajax execute="txtSearchQuery" render=":mashupSearchForm:googleSearchResults"/>            
+            </p:commandButton>
+        </h:panelGrid>
+        
+		<h:panelGrid columns="2" columnClasses="alignTop,alignTop">
+				
+        <h:panelGroup id="googleSearchResults">
+        	  <h2><h:outputText value="Google Results" rendered="#{mashupSearchForm.searchQuery ne null}"/></h2>
+	          <mashup:googleSearchList searchQuery="#{mashupSearchForm.searchQuery}" 
+	      		    	       		   resultItemVar="searchItem" 
+	      			                   resultItemIndex="index" 
+	      			                   rendered="#{mashupSearchForm.searchQuery ne null}"
+									   resultSetSize="large">
+	  
+		          <f:facet name="resultItem">
+		              <h:panelGrid columns="1"> 
+		                  <h:outputLink styleClass="standard_bold" value="#{searchItem.url}" target="_blank">
+		                      <h:outputText styleClass="standard" value="#{searchItem.title}" escape="false"/>
+		                  </h:outputLink>  
+		                  <h:outputText styleClass="standard" value="#{searchItem.content}" escape="false"/>
+						  <h:outputText id="seperator2" value=""/>
+		              </h:panelGrid>        
+		          </f:facet>
+	          </mashup:googleSearchList>        
+        </h:panelGroup>        
+      </h:panelGrid>	  
+        
+    </h:form>
+		
+		
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head></h:head>
+<body>
+	<h1>Assigned patients</h1>
+
+	
+
+	<h:form id="master">
+		<h:panelGrid columns="1">
+			<p:outputLabel value="Search by title" />
+			<p:inputText value="#{doctorBean.titleSearch}" />
+
+		</h:panelGrid>
+		<p:commandButton 
+			value="Search" update=":master" ajax="false">
+		</p:commandButton>
+
+
+
+		<p:dataTable value="#{doctorBean.patients}" var="p"
+			paginator="true" paginatorPosition="bottom" rows="5"
+			rowKey="#{p.userId}" selectionMode="single"
+			selection="#{doctorBean.patient}">
+
+
+			<f:facet name="header">
+				<p:outputLabel value="my patients"></p:outputLabel>
+			</f:facet>
+			<p:ajax event="rowSelect"
+				listener="#{doctorBean.onRowSelect(event)}" update=":details">
+
+			</p:ajax>
+
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Id Patient" />
+				</f:facet>
+				<p:outputLabel value="#{p.userId}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="First name" />
+				</f:facet>
+				<p:outputLabel value="#{p.firstName}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Last ame" />
+				</f:facet>
+				<p:outputLabel value="#{p.lastName}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Confirmed" />
+				</f:facet>
+				<p:outputLabel value="#{p.confirmed}" />
+				<p:outputLabel value="YES" rendered="#{p.confirmed == 1}" />
+				<p:outputLabel value="NO" rendered="#{p.confirmed == 0}" />
+				
+			</p:column>
+			
+		
+
+		</p:dataTable>
+
+		
+
+
+
+	</h:form>
+
+	<p:panel id="details" header="patient detail"
+		visible="#{doctorBean.display}">
+		<h:form id="formadd" rendered="#{doctorBean.display}">
+			<h:panelGrid columns="2">
+
+
+				<p:outputLabel value="Login" />
+				<h:inputText value="#{doctorBean.patient.login}" />
+				<p:outputLabel value="Confirmed" />
+				<h:inputText value="#{doctorBean.patient.confirmed}" />
+			</h:panelGrid>
+
+
+
+			<h:panelGrid columns="3">
+
+
+
+				<p:commandButton actionListener="#{doctorBean.doAcceptPatient()}"
+					value="Accept" update=":master :details" />
+				<p:commandButton actionListener="#{doctorBean.doRefusePatient()}"
+					value="Refuse" update=":master :details" />
+
+
+			</h:panelGrid>
+
+		</h:form>
+	</p:panel>
+
+
+</body>
+</html>

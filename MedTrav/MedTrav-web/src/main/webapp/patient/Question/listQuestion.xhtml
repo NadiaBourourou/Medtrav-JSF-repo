@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head></h:head>
+<body>
+	<h1>Questions</h1>
+
+	<p:media value="/resources/media/questions.mp3" width="0" height="0"
+		player="quicktime">
+		<f:param name="autoPlay" value="false" />
+	</p:media>
+
+	<h:form id="master">
+		<h:panelGrid columns="1">
+			<p:outputLabel value="Search by title" />
+			<p:inputText value="#{questionBean.titleSearch}" />
+
+		</h:panelGrid>
+		<p:commandButton action="#{questionBean.doFindQuestionByTitle()}"
+			value="Search" update=":master" ajax="false">
+		</p:commandButton>
+
+
+
+		<p:dataTable value="#{questionBean.questions}" var="p"
+			paginator="true" paginatorPosition="bottom" rows="5"
+			rowKey="#{p.questionId}" selectionMode="single"
+			selection="#{questionBean.question}">
+
+
+			<f:facet name="header">
+				<p:outputLabel value="all available questions"></p:outputLabel>
+			</f:facet>
+			<p:ajax event="rowSelect"
+				listener="#{questionBean.onRowSelect(event)}" update=":details">
+
+			</p:ajax>
+
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Id Question" />
+				</f:facet>
+				<p:outputLabel value="#{p.questionId}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Title" />
+				</f:facet>
+				<p:outputLabel value="#{p.title}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Content" />
+				</f:facet>
+				<p:outputLabel value="#{p.description}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Date" />
+				</f:facet>
+				<p:outputLabel value="#{p.date}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Patient" />
+				</f:facet>
+				<p:outputLabel value="#{p.patient.userId}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<p:outputLabel value="With response" />
+				</f:facet>
+
+				<p:outputLabel value="YES" rendered="#{p.response != null}" />
+				<p:outputLabel value="NO" rendered="#{p.response == null}" />
+
+			</p:column>
+
+		</p:dataTable>
+
+		<h:panelGrid columns="1" cellpadding="5">
+			<p:commandButton value="New question" action="/patient/Question/addQuestion?faces-redirect=true" />
+			<p:commandButton action="/patient/Question/chat?faces-redirect=true"
+				value="Join the chat" />
+		</h:panelGrid>
+
+
+
+	</h:form>
+
+	<p:panel id="details" header="question detail"
+		visible="#{questionBean.display}">
+		<h:form id="formadd" rendered="#{questionBean.display}">
+			<h:panelGrid columns="2">
+
+
+				<p:outputLabel value="Title" />
+				<h:inputText value="#{questionBean.question.title}" />
+				<p:outputLabel value="Content" />
+				<h:inputText value="#{questionBean.question.description}" />
+			</h:panelGrid>
+
+
+
+			<h:panelGrid columns="3">
+
+
+
+				<p:commandButton actionListener="#{questionBean.doUpdateQuestion()}"
+					value="Update" update=":master :details" />
+				<p:commandButton actionListener="#{questionBean.doDeleteQuestion()}"
+					value="Delete" update=":master :details" />
+
+
+			</h:panelGrid>
+
+		</h:form>
+	</p:panel>
+
+
+</body>
+</html>

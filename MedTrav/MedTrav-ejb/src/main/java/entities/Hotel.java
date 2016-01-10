@@ -32,6 +32,8 @@ public class Hotel implements Serializable {
 	private Double priceSingle;
 	private Double priceSuite;
 	private Integer stars;
+	private String codePostal;
+
 	private List<ServiceHotel> servicesHotel;
 	
 	private List<HotelBooking> hotelBookings;
@@ -126,6 +128,16 @@ public class Hotel implements Serializable {
 
 	public void setServicesHotel(List<ServiceHotel> servicesHotel) {
 		this.servicesHotel = servicesHotel;
+	}
+
+
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
 	}
 
 }

@@ -41,15 +41,14 @@ public class PopulateDb {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-	
+
 	@EJB
 	private SurgeryServicesLocal surgeryServicesLocal;
 	@EJB
 	private ServiceHotelServicesLocal serviceHotelServicesLocal;
 	@EJB
 	private AssignedPatientsServicesLocal assignedPatientsServicesLocal;
-	@EJB 
+	@EJB
 	private UserServicesLocal userServicesLocal;
 	@EJB
 	private TestimonyServicesLocal testimonyServicesLocal;
@@ -380,190 +379,206 @@ public class PopulateDb {
 		surgeryServicesLocal.addSurgeryAndAssignItToProcedure(Surgery3_2, 2);
 		surgeryServicesLocal.addSurgeryAndAssignItToProcedure(Surgery1_3, 3);
 		surgeryServicesLocal.addSurgeryAndAssignItToProcedure(Surgery2_3, 3);
-		
+
 		// Hotel & Clinic
-		
-		  Hotel hotel1= new Hotel();
-			hotel1.setName("Barcelo Carthage");
-			hotel1.setAddress("Gammarth");
-			hotel1.setDescription("Luxure");
-			hotel1.setPriceSingle(100D);
-			hotel1.setPriceSuite(150D);
-			hotel1.setStars(5);
-			hotel1.setState(StateType.ENABLED);
-			
-			
 
-			Hotel hotel2= new Hotel();
-			hotel2.setName("Movenpick");
-			hotel2.setAddress("Gammarth");
-			hotel2.setDescription("Comfortable");
-			hotel2.setPriceSingle(140D);
-			hotel2.setPriceSuite(200D);
-			hotel2.setStars(5);
-			hotel2.setState(StateType.ENABLED);
-			
-			Hotel hotel3= new Hotel();
-			hotel3.setName("Concorde");
-			hotel3.setAddress("Berges du Lac");
-			hotel3.setDescription("Top");
-			hotel3.setPriceSingle(130D);
-			hotel3.setPriceSuite(160D);
-			hotel3.setStars(4);
-			hotel3.setState(StateType.DISABLED);
-			
-			
-			Clinic clinic1= new Clinic();
-			clinic1.setName("Pasteur");
-			clinic1.setAddress("Charguia");
-			clinic1.setProfessionalism("Excellent");
-			clinic1.setEmail("pasteur@gmail.com");
-			clinic1.setPhoneNumber(22899123);
-			clinic1.setPriceSimple(60D);
-			clinic1.setPriceSingle(100D);
-			
-			Clinic clinic2= new Clinic();
-			clinic2.setName("Hannibal");
-			clinic2.setAddress("Lac");
-			clinic2.setProfessionalism("Good");
-			clinic2.setEmail("hannibal@gmail.com");
-			clinic2.setPhoneNumber(22123654);
-			clinic2.setPriceSimple(70D);
-			clinic2.setPriceSingle(120D);
-			
-			
-			ServiceHotel serviceHotel1= new ServiceHotel();
-			serviceHotel1.setName("Spa");
-			serviceHotel1.setDescription("The opportunity to feel relaxed");
-			
+		Hotel hotel1 = new Hotel();
+		hotel1.setName("Hasdrubal Prestige 4*");
+		hotel1.setAddress("Sidi Mahrez, Djerba, TUNISIA");
+		hotel1.setDescription("Luxure");
+		hotel1.setPriceSingle(100D);
+		hotel1.setPriceSuite(150D);
+		hotel1.setStars(4);
+		hotel1.setCodePostal("TSXX0018");
+		hotel1.setState(StateType.ENABLED);
 
-			ServiceHotel serviceHotel2= new ServiceHotel();
-			serviceHotel2.setName("Fitness room");
-			serviceHotel2.setDescription("So you can keep your habits...");
+		Hotel hotel2 = new Hotel();
+		hotel2.setName("Scheherazade Hôtel 3*");
+		hotel2.setAddress("Boulevard du 14 Janvier, Sousse, TUNISIA");
+		hotel2.setDescription("Comfortable");
+		hotel2.setPriceSingle(140D);
+		hotel2.setPriceSuite(200D);
+		hotel2.setStars(3);
+		hotel2.setCodePostal("TSXX0009");
+		hotel2.setState(StateType.ENABLED);
 
-			ServiceHotel serviceHotel3= new ServiceHotel();
-			serviceHotel3.setName("Babysitting Service");
-			serviceHotel3.setDescription("Have more time for yourself");
+		Hotel hotel3 = new Hotel();
+		hotel3.setName("Bizerta Resort Hôtel 5*");
+		hotel3.setAddress("Rue de la corniche, Bizerte, TUNISIA");
+		hotel3.setDescription("Top");
+		hotel3.setPriceSingle(130D);
+		hotel3.setPriceSuite(160D);
+		hotel3.setStars(5);
+		hotel3.setCodePostal("TSXX0001");
+		hotel3.setState(StateType.DISABLED);
 
-			ServiceHotel serviceHotel4= new ServiceHotel();
-			serviceHotel4.setName("Multiple dining options");
-			serviceHotel4.setDescription("Learn more about our culture");
-			
+		Hotel hotel4 = new Hotel();
+		hotel4.setName("Iberostar Diar Elandalous 4*");
+		hotel4.setAddress("Port El Kantaoui, Sousse , TUNISIA");
+		hotel4.setDescription("Top");
+		hotel4.setPriceSingle(130D);
+		hotel4.setPriceSuite(160D);
+		hotel4.setStars(4);
+		hotel4.setCodePostal("TSXX0009");
+		hotel4.setState(StateType.DISABLED);
 
-			ServiceHotel serviceHotel5= new ServiceHotel();
-			serviceHotel5.setName("GOLF");
-			serviceHotel5.setDescription("The grass is greener in our side");
-			
+		Hotel hotel5 = new Hotel();
+		hotel5.setName("Regency Hotel and Spa hôtel 4*");
+		hotel5.setAddress("Cap Marina, Monastir, TUNISIA");
+		hotel5.setDescription("Top");
+		hotel5.setPriceSingle(130D);
+		hotel5.setPriceSuite(160D);
+		hotel5.setStars(4);
+		hotel5.setCodePostal("TSXX0015");
+		hotel5.setState(StateType.DISABLED);
 
-			entityManager.merge(clinic1);
-			entityManager.merge(clinic2);
-			entityManager.merge(hotel1);
-			entityManager.merge(hotel2);
-			entityManager.merge(hotel3);
-			
-			serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel1, 1);
-			serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel2, 1);
-			serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel3, 2);
-			serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel4, 2);
-			serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel5, 3);
-			
-			
-			/*Hajer*/
-		
-			
-		Patient monpatient1=testimonyServicesLocal.findPatientById(1);
-		Patient monpatient2=testimonyServicesLocal.findPatientById(2);
-		Doctor mondoctor1=userServicesLocal.findDoctorById(4);
-		Surgery monsurgery1=testimonyServicesLocal.findSurgeryById(1);
-		Surgery monsurgery2=testimonyServicesLocal.findSurgeryById(2);
-		
-			Testimony testimony1=new Testimony();
-			testimony1.setDate(new java.util.Date());
-			testimony1.setTitle("first medical travel");
-			testimony1.setDescription("I was admitted after having an accident at a waterfall. Thank you for the wonderful treatment ");
-			testimony1.setPatient(monpatient1);
-			
-			Testimony testimony2=new Testimony();
-			testimony2.setDate(new java.util.Date());
-			testimony2.setTitle("second medical travel");
-			testimony2.setDescription("I just want to thank you for the treatment. ");
-			testimony2.setPatient(monpatient1);
-			
-			
-			Testimony testimony3=new Testimony();
-			testimony3.setDate(new java.util.Date());
-			testimony3.setTitle("bonjour");
-			testimony3.setDescription("I am from France and I am really thankful for the treatment. ");
-			testimony3.setPatient(monpatient2);
-			
-			Testimony testimony4=new Testimony();
-			testimony4.setDate(new java.util.Date());
-			testimony4.setTitle("foreign travel");
-			testimony4.setDescription("Really it was good to see you and to have a treatment in tunisia. ");
-			testimony4.setPatient(monpatient2);
-			
-			
-			entityManager.merge(testimony1);
-			entityManager.merge(testimony2);
-			entityManager.merge(testimony3);
-			entityManager.merge(testimony4);
-	
-			
-			Question question1=new Question();
-			question1.setDate(new java.util.Date());
-			question1.setTitle("travel answered");
-			question1.setDescription("why does people travel abroad for treatment?");
-			question1.setResponse("To discover a new country and to save money.");
-			question1.setPatient(monpatient1);
-			
-			Question question2=new Question();
-			question2.setDate(new java.util.Date());
-			question2.setTitle("tourism answered");
-			question2.setDescription("can family members travel with me?");
-			question2.setResponse("you can choose to have any number of people travel with you");
-			question2.setPatient(monpatient1);
-			
-			Question question3=new Question();
-			question3.setDate(new java.util.Date());
-			question3.setTitle("tourism");
-			question3.setDescription("what is medical tourism?");
-			question3.setPatient(monpatient1);
-			
-			Question question4=new Question();
-			question4.setDate(new java.util.Date());
-			question4.setTitle("travel");
-			question4.setDescription("do I have to sacrifice quality of care for savings?");
-			question4.setPatient(monpatient2);
-			
-			
-			entityManager.merge(question1);
-			entityManager.merge(question2);
-			entityManager.merge(question3);
-			entityManager.merge(question4);
-			
-				
-			//userServicesLocal.bookSurgery(monsurgery1, "comm ", 1);
-			//userServicesLocal.bookSurgery(monsurgery2, "comm", 2);
-			
-			//assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 1);
-			//assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 2);
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			/*Hajer*/	
-			
+		Hotel hotel6 = new Hotel();
+		hotel6.setName("Dar El Marsa Hotel 4*");
+		hotel6.setAddress("Avenue Habib Bourguiba, Marsa, TUNISIA");
+		hotel6.setDescription("Top");
+		hotel6.setPriceSingle(130D);
+		hotel6.setPriceSuite(160D);
+		hotel6.setStars(4);
+		hotel6.setCodePostal("TSXX0005");
+		hotel6.setState(StateType.DISABLED);
+
+		Clinic clinic1 = new Clinic();
+		clinic1.setName("Pasteur");
+		clinic1.setAddress("Charguia");
+		clinic1.setProfessionalism("Excellent");
+		clinic1.setEmail("pasteur@gmail.com");
+		clinic1.setPhoneNumber(22899123);
+		clinic1.setPriceSimple(60D);
+		clinic1.setPriceSingle(100D);
+
+		Clinic clinic2 = new Clinic();
+		clinic2.setName("Hannibal");
+		clinic2.setAddress("Lac");
+		clinic2.setProfessionalism("Good");
+		clinic2.setEmail("hannibal@gmail.com");
+		clinic2.setPhoneNumber(22123654);
+		clinic2.setPriceSimple(70D);
+		clinic2.setPriceSingle(120D);
+
+		ServiceHotel serviceHotel1 = new ServiceHotel();
+		serviceHotel1.setName("Spa");
+		serviceHotel1.setDescription("The opportunity to feel relaxed");
+
+		ServiceHotel serviceHotel2 = new ServiceHotel();
+		serviceHotel2.setName("Fitness room");
+		serviceHotel2.setDescription("So you can keep your habits...");
+
+		ServiceHotel serviceHotel3 = new ServiceHotel();
+		serviceHotel3.setName("Babysitting Service");
+		serviceHotel3.setDescription("Have more time for yourself");
+
+		ServiceHotel serviceHotel4 = new ServiceHotel();
+		serviceHotel4.setName("Multiple dining options");
+		serviceHotel4.setDescription("Learn more about our culture");
+
+		ServiceHotel serviceHotel5 = new ServiceHotel();
+		serviceHotel5.setName("GOLF");
+		serviceHotel5.setDescription("The grass is greener in our side");
+
+		entityManager.merge(clinic1);
+		entityManager.merge(clinic2);
+
+		entityManager.merge(hotel1);
+		entityManager.merge(hotel2);
+		entityManager.merge(hotel3);
+		entityManager.merge(hotel4);
+		entityManager.merge(hotel5);
+		entityManager.merge(hotel6);
+
+		serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel1, 1);
+		serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel2, 1);
+		serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel3, 2);
+		serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel4, 2);
+		serviceHotelServicesLocal.assignServiceHotelToHotel(serviceHotel5, 3);
+
+		/* Hajer */
+
+		Patient monpatient1 = testimonyServicesLocal.findPatientById(1);
+		Patient monpatient2 = testimonyServicesLocal.findPatientById(2);
+		Doctor mondoctor1 = userServicesLocal.findDoctorById(4);
+		Surgery monsurgery1 = testimonyServicesLocal.findSurgeryById(1);
+		Surgery monsurgery2 = testimonyServicesLocal.findSurgeryById(2);
+
+		Testimony testimony1 = new Testimony();
+		testimony1.setDate(new java.util.Date());
+		testimony1.setTitle("first medical travel");
+		testimony1
+				.setDescription("I was admitted after having an accident at a waterfall. Thank you for the wonderful treatment ");
+		testimony1.setPatient(monpatient1);
+
+		Testimony testimony2 = new Testimony();
+		testimony2.setDate(new java.util.Date());
+		testimony2.setTitle("second medical travel");
+		testimony2
+				.setDescription("I just want to thank you for the treatment. ");
+		testimony2.setPatient(monpatient1);
+
+		Testimony testimony3 = new Testimony();
+		testimony3.setDate(new java.util.Date());
+		testimony3.setTitle("bonjour");
+		testimony3
+				.setDescription("I am from France and I am really thankful for the treatment. ");
+		testimony3.setPatient(monpatient1);
+
+		Testimony testimony4 = new Testimony();
+		testimony4.setDate(new java.util.Date());
+		testimony4.setTitle("foreign travel");
+		testimony4
+				.setDescription("Really it was good to see you and to have a treatment in tunisia. ");
+		testimony4.setPatient(monpatient1);
+
+		entityManager.merge(testimony1);
+		entityManager.merge(testimony2);
+		entityManager.merge(testimony3);
+		entityManager.merge(testimony4);
+
+		Question question1 = new Question();
+		question1.setDate(new java.util.Date());
+		question1.setTitle("travel answered");
+		question1
+				.setDescription("why does people travel abroad for treatment?");
+		question1.setResponse("To discover a new country and to save money.");
+		question1.setPatient(monpatient1);
+
+		Question question2 = new Question();
+		question2.setDate(new java.util.Date());
+		question2.setTitle("tourism answered");
+		question2.setDescription("can family members travel with me?");
+		question2
+				.setResponse("you can choose to have any number of people travel with you");
+		question2.setPatient(monpatient1);
+
+		Question question3 = new Question();
+		question3.setDate(new java.util.Date());
+		question3.setTitle("tourism");
+		question3.setDescription("what is medical tourism?");
+		question3.setPatient(monpatient1);
+
+		Question question4 = new Question();
+		question4.setDate(new java.util.Date());
+		question4.setTitle("travel");
+		question4
+				.setDescription("do I have to sacrifice quality of care for savings?");
+		question4.setPatient(monpatient1);
+
+		entityManager.merge(question1);
+		entityManager.merge(question2);
+		entityManager.merge(question3);
+		entityManager.merge(question4);
+
+		// userServicesLocal.bookSurgery(monsurgery1, "comm ", 1);
+		// userServicesLocal.bookSurgery(monsurgery2, "comm", 2);
+
+		 assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 1);
+		 assignedPatientsServicesLocal.assignPatientToDoctor(mondoctor1, 2);
+
+		/* Hajer */
+
 	}
 
 }

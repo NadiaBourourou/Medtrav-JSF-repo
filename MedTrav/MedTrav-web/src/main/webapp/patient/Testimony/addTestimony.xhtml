@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" >
+
+<h:head></h:head>
+<body>
+	<h1> Add testimony</h1>
+	<br />
+<h:form >
+		<h:panelGrid columns="2">
+			<p:outputLabel value="title" />
+			<p:inputText value="#{testimonyBean.testimony.title}" />
+			<p:outputLabel value="content" />
+			<p:inputText value="#{testimonyBean.testimony.description}" />
+			
+			
+			<h:form prependId="false">
+			<h2>Captcha</h2>
+			<p:messages id="msg"/>
+			<p:captcha id="captcha"></p:captcha>
+			<br/>
+			<p:commandButton value="Check" actionListener="#{captcha.check}"
+								ajax="false"></p:commandButton>
+	
+	</h:form>
+			
+		</h:panelGrid>
+		<p:commandButton action="#{testimonyBean.doAddTestimony()}" value="add" />
+	</h:form>
+</body>
+</html>

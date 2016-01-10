@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>MedTrav-web</display-name>
+ 
+ 
+  <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6LeW-wQTAAAAAKMsln8N_vJfFu3SsVHkcx929UIv</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6LeW-wQTAAAAANFhAkHV1kwI2FNB0SpbdjyJ0jb9</param-value>
+    </context-param>
+  
+ 
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

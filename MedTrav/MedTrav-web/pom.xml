@@ -13,6 +13,28 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
 
+<repositories>
+	<repository>
+    <id>sonatype-oss-public</id>
+    <url>https://oss.sonatype.org/content/groups/public/</url>
+    <releases>
+        <enabled>true</enabled>
+    </releases>
+    </repository>
+    
+    <repository>
+            <id>googlecode.com</id>
+            <url>http://mashups4jsf.googlecode.com/svn/trunk/mashups4jsf-repo</url>
+        </repository>
+        
+         <repository>
+            <id>monrepo</id>
+               <url>http://gmaps4jsf.googlecode.com/svn/trunk/gmaps4jsf-repo</url>
+        
+        </repository>
+
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
@@ -28,6 +50,30 @@
 			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+  <groupId>org.brickred</groupId>
+  <artifactId>socialauth</artifactId>
+  <version>4.2</version>
+</dependency>
+
+	 <dependency>
+            <groupId>com.googlecode.mashups4jsf</groupId>
+            <artifactId>mashups4jsf-core</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+        </dependency> 
+       
+          <dependency>
+            <groupId>rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>0.9</version>      
+        </dependency>
+		
+		 <dependency>
+            <groupId>com.googlecode.gmaps4jsf</groupId>
+            <artifactId>gmaps4jsf-core</artifactId>
+            <version>1.1.1</version>
+        </dependency>   
 	</dependencies>
 
 	<build>

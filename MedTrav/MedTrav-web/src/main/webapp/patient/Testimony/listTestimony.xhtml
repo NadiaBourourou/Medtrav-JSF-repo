@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" >
+
+<h:head></h:head>
+<body>
+	<h1> Testimonials</h1>
+
+<p:media value="/resources/media/testimonials.mp3" width="0" height="0" player="quicktime">
+    <f:param name="autoPlay" value="false" />
+</p:media>
+
+
+	<h:form id="master">
+	<h:panelGrid columns="1">
+			<p:outputLabel value="Search by title" />
+			<p:inputText value="#{testimonyBean.titleSearch}" />
+
+		</h:panelGrid>
+	<p:commandButton action="#{testimonyBean.doFindTestimonyByTitle()}" value="Search" update=":master" ajax="false" >
+	  </p:commandButton>
+	
+	
+	
+		<p:dataTable value="#{testimonyBean.testimonies}" 
+		    var="p" 
+		    paginator="true"
+			paginatorPosition="bottom" 
+			rows="5" 
+			rowKey="#{p.testimonyId}"
+			selectionMode="single" 
+			selection="#{testimonyBean.testimony}">
+
+
+			<f:facet name="header">
+				<p:outputLabel value="all available testimonials"></p:outputLabel>
+			</f:facet>
+			<p:ajax event="rowSelect"
+				listener="#{testimonyBean.onRowSelect(event)}" update=":details">
+
+			</p:ajax>
+
+			<p:column >
+				<f:facet name="header">
+					<p:outputLabel value="Id Testimony" />
+				</f:facet>
+				<p:outputLabel value="#{p.testimonyId}" />
+			</p:column>
+			
+
+		<p:column >
+				<f:facet name="header">
+					<p:outputLabel value="Title" />
+				</f:facet>
+				<p:outputLabel value="#{p.title}" />
+			</p:column>
+			<p:column >
+				<f:facet name="header">
+					<p:outputLabel value="Content" />
+				</f:facet>
+				<p:outputLabel value="#{p.description}" />
+			</p:column>
+			<p:column >
+				<f:facet name="header">
+					<p:outputLabel value="Date" />
+				</f:facet>
+				<p:outputLabel value="#{p.date}" />
+			</p:column>
+			<p:column >
+				<f:facet name="header">
+					<p:outputLabel value="Patient" />
+				</f:facet>
+				<p:outputLabel value="#{p.patient.userId}" />
+			</p:column>
+			
+
+			
+			
+		</p:dataTable>
+
+  <h:panelGrid columns="1" cellpadding="5">
+                <p:commandButton  value="New testimony" action="/patient/Testimony/addTestimony?faces-redirect=true"  />  
+         <p:commandButton  value="Discover hotel places and weather" action="/patient/Testimony/map?faces-redirect=true"  />  
+
+                
+</h:panelGrid>
+		
+
+
+	</h:form>
+	
+	<p:panel id="details" header="testimony detail"
+		visible="#{testimonyBean.display}">
+		<h:form id="formadd" rendered="#{testimonyBean.display}">
+			<h:panelGrid columns="2">
+
+			<p:outputLabel value="Title" />
+			<p:inputText value="#{testimonyBean.testimony.title}" />
+			<p:outputLabel value="Content" />
+			<p:inputText value="#{testimonyBean.testimony.description}" />
+			</h:panelGrid>
+
+
+
+			<h:panelGrid columns="3">
+				
+				<p:commandButton actionListener="#{testimonyBean.doDeleteTestimony()}" value="Delete" 
+				update=":master :details"/>
+				<p:commandButton actionListener="#{testimonyBean.doUpdateTestimony()}" value="Update" 
+				update=":master :details"/>
+
+        
+			</h:panelGrid>
+
+		</h:form>
+	</p:panel>
+
+
+<br />
+                 <br />
+
+Recommand us
+         
+                
+<br></br>
+            
+           
+      <button style="margin-top:-30px;background-color:#3b5998;     border-radius: 5px !important;color:white;width:100px" >
+               <a style="color:white;text-decoration:none;" href="#" 
+  onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://www.facebook.com/MedTrav/?fref=ts'), 
+      'facebook-share-dialog', 
+      'width=626,height=436'); 
+    return false;">
+  Share
+</a>
+ </button>
+
+
+
+    <a style="margin-top:25px;" href="https://twitter.com/share" class="twitter-share-button" data-url="http://localhost:2719/MedTrav" data-text="Programming sharing portal" data-via="medicalTravel" data-count="vertical">Tweet</a>
+    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+    <!-- Place this tag where you want the share button to render. -->
+    <!-- Placez cette balise dans l'en-tête ou juste avant la balise de fermeture du corps de texte. -->
+    <script src="https://apis.google.com/js/platform.js" >
+        { lang: 'en-GB' }
+    </script>
+
+    <!-- Placez cette balise où vous souhaitez faire apparaître le gadget bouton "Partager". -->
+    <div style="margin-top:25px;" class="g-plus" data-action="share" ></div>
+
+    <br />
+    <br />
+
+    
+    
+
+		
+</body>
+</html>
