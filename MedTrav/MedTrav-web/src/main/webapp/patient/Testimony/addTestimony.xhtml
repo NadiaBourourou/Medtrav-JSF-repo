@@ -11,10 +11,16 @@
 	<br />
 <h:form >
 		<h:panelGrid columns="2">
-			<p:outputLabel value="title" />
-			<p:inputText value="#{testimonyBean.testimony.title}" />
-			<p:outputLabel value="content" />
-			<p:inputText value="#{testimonyBean.testimony.description}" />
+			<p:outputLabel value="Title" />
+			<p:inputText id="chp1" value="#{testimonyBean.testimony.title}" 
+		validatorMessage="Please enter the title.">
+				<f:validateLength maximum="10" minimum="3"></f:validateLength>
+			</p:inputText>
+			<p:outputLabel value="Content" />
+			<p:inputText id="chp2" value="#{testimonyBean.testimony.description}" 
+			validatorMessage="Please enter the description.">
+				<f:validateLength maximum="10" minimum="3"></f:validateLength>
+			</p:inputText>
 			
 			
 			<h:form prependId="false">
@@ -26,9 +32,11 @@
 								ajax="false"></p:commandButton>
 	
 	</h:form>
-			
+			<br/>
 		</h:panelGrid>
-		<p:commandButton action="#{testimonyBean.doAddTestimony()}" value="add" />
+		<h:commandButton action="#{testimonyBean.doAddTestimony()}" value="add" ><br/>
+		
+		</h:commandButton>
 	</h:form>
 </body>
 </html>

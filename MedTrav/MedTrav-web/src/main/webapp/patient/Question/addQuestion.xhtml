@@ -12,11 +12,19 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			<p:outputLabel value="title" />
-			<p:inputText value="#{questionBean.question.title}" />
+			<p:inputText id="chp1" value="#{questionBean.question.title}" validatorMessage="Please enter the title.">
+			<f:validateLength maximum="10" minimum="3"></f:validateLength>
+			</p:inputText>
 			<p:outputLabel value="content" />
-			<p:inputText value="#{questionBean.question.description}" />
+			<p:inputText id="chp2" value="#{questionBean.question.description}" validatorMessage="Please enter the description.">
+			<f:validateLength maximum="10" minimum="3"></f:validateLength>
+			</p:inputText>
 		</h:panelGrid>
-		<p:commandButton action="#{questionBean.doAddQuestion()}" value="add" />
+		<br/>
+		<h:commandButton action="#{questionBean.doAddQuestion()}" value="add" ><br/>
+		<h:message for="chp1" styleClass="error"/> <br/>
+		<h:message for="chp2" styleClass="error"/>
+		</h:commandButton>
 	</h:form>
 </body>
 </html>
